@@ -1,0 +1,179 @@
+body {
+	font-family:
+		system-ui,
+		-apple-system,
+		BlinkMacSystemFont,
+		sans-serif;
+	background: #f4f6f8;
+	margin: 0;
+	padding: 40px;
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 30px;
+	color: #333;
+}
+
+.table-container {
+	max-width: 1000px;
+	margin: auto;
+	background: #fff;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+thead {
+	background: #f0f2f5;
+}
+
+th,
+td {
+	padding: 14px 16px;
+	text-align: left;
+}
+
+th {
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: #555;
+}
+
+tbody tr {
+	border-bottom: 1px solid #eee;
+}
+
+tbody tr:hover {
+	background: #fafafa;
+}
+
+.actions {
+	display: flex;
+	gap: 10px;
+}
+
+.btn {
+	padding: 6px 12px;
+	border-radius: 6px;
+	font-size: 14px;
+	text-decoration: none;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.btn-edit {
+	background: #4f46e5;
+	color: white;
+}
+
+.btn-delete {
+	background: #ef4444;
+	color: white;
+	border: none;
+}
+
+.btn-edit:hover {
+	background: #4338ca;
+}
+
+.btn-delete:hover {
+	background: #dc2626;
+}
+
+.salary {
+	font-weight: 600;
+}
+
+h2 {
+	text-align: center;
+}
+
+.form-container {
+	max-width: 500px;
+	margin: auto;
+	background: #fff;
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.form-group {
+	margin-bottom: 18px;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 6px;
+	font-weight: 600;
+	color: #555;
+	font-size: 14px;
+}
+
+.form-group input {
+	width: 100%;
+	padding: 10px 12px;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	font-size: 14px;
+	box-sizing: border-box;
+	transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+	outline: none;
+	border-color: #4f46e5;
+	box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.form-actions {
+	display: flex;
+	gap: 12px;
+	margin-top: 24px;
+}
+
+.btn-cancel {
+	background: #6b7280;
+	color: white;
+}
+
+.btn-cancel:hover {
+	background: #4b5563;
+}
+
+@media (max-width: 768px) {
+	table,
+	thead,
+	tbody,
+	th,
+	td,
+	tr {
+		display: block;
+	}
+
+	thead {
+		display: none;
+	}
+
+	tr {
+		margin-bottom: 15px;
+	}
+
+	td {
+		display: flex;
+		justify-content: space-between;
+		padding: 10px;
+	}
+
+	td::before {
+		content: attr(data-label);
+		font-weight: bold;
+		color: #666;
+	}
+}

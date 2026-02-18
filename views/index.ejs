@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Employee Payroll System</title>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+    <h1>Employee Payroll System</h1>
+    <h2><button onclick="location.href='/employees/create'">Add New Employee</button></h2>
+    <div class="table-container">
+        <table>
+        <thead>
+            <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% employees.forEach(employee => { %>
+            <tr>
+                <td data-label="Name"><%= employee.name %></td>
+                <td data-label="Position"><%= employee.position %></td>
+                <td data-label="Department"><%= employee.department %></td>
+                <td data-label="Salary" class="salary">$<%= employee.salary %></td>
+                <td data-label="Actions">
+                <div class="actions">
+                    <a 
+                    href="/employees/edit/<%= employee.id %>" 
+                    class="btn btn-edit"
+                    >
+                    Edit
+                    </a>
+
+                    <form 
+                    action="/employees/delete/<%= employee.id %>" 
+                    method="POST"
+                    onsubmit="return confirm('Are you sure you want to delete this employee?');"
+                    >
+                    <button class="btn btn-delete" type="submit">
+                        Delete
+                    </button>
+                    </form>
+                </div>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+        </table>
+    </div>
+    </body>
+</html>
