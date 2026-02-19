@@ -15,7 +15,16 @@ app.get('/', async (req, res) => {
         const totalBasicSalary = employees.reduce((sum, e) => sum + Number(e.salary), 0);
         const totalTax = totalBasicSalary * 0.12;
         const totalNetSalary = totalBasicSalary - totalTax;
-        res.render("index", { employees, totalBasicSalary, totalTax, totalNetSalary })
+
+        const search = req.query.search || '';
+        const filtered = search
+            ? employees.filter(e =>
+                e.name.toLowerCase().includes(search.toLowerCase()) ||
+                e.department.toLowerCase().includes(search.toLowerCase())
+            )
+            : employees;
+
+        res.render("index", { employees: filtered, totalBasicSalary, totalTax, totalNetSalary, search })
     }
     catch (error) {
         return res.status(500).send("Failed")
