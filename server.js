@@ -7,12 +7,15 @@ app.set("view engine", "ejs")
 app.use(express.static('public'))
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 
-app.get('/',  async (req, res) => {
+app.get('/', async (req, res) => {
     try {
         const employees = await readFromFile()
-        res.render("index", {employees})
+        const totalBasicSalary = employees.reduce((sum, e) => sum + Number(e.salary), 0);
+        const totalTax = totalBasicSalary * 0.12;
+        const totalNetSalary = totalBasicSalary - totalTax;
+        res.render("index", { employees, totalBasicSalary, totalTax, totalNetSalary })
     }
     catch (error) {
         return res.status(500).send("Failed")
@@ -37,16 +40,16 @@ app.post('/employees/create', async (req, res) => {
         await writeToFile(employees);
 
         res.redirect('/')
-    } 
+    }
     catch (error) {
-        
+
     }
 })
 
 app.post('/employees/delete/:employeeId', async (req, res) => {
     try {
-        const {employeeId} = req.params;
-        if(!employeeId){
+        const { employeeId } = req.params;
+        if (!employeeId) {
             return res.status(400).send("Employee ID is required to delete")
         }
         const employees = await readFromFile();
@@ -54,9 +57,9 @@ app.post('/employees/delete/:employeeId', async (req, res) => {
         const updatedEmployees = employees.filter(e => e.id.toString() !== employeeId)
 
         await writeToFile(updatedEmployees)
-        
+
         res.redirect('/');
-    } 
+    }
     catch (error) {
         return res.status(500).send("Failed to delete the employee");
     }
@@ -80,24 +83,24 @@ app.get('/employees/edit/:employeeId', async (req, res) => {
 app.post('/employees/edit/:employeeId', async (req, res) => {
     try {
         const { employeeId } = req.params;
-        
-        if(!employeeId) {
+
+        if (!employeeId) {
             return res.status(400).send("Employee ID is required to edit")
         }
         const employees = await readFromFile();
 
         const employee = employees.find(e => e.id.toString() === employeeId);
 
-        if(!employee) {
+        if (!employee) {
             return res.status(404).send("Student not found");
         }
 
-        const updatedEmployees = employees.map((e) => e.id.toString() === employeeId ? {...e, ...req.body, id: e.id} : e);
+        const updatedEmployees = employees.map((e) => e.id.toString() === employeeId ? { ...e, ...req.body, id: e.id } : e);
 
         await writeToFile(updatedEmployees)
 
         res.redirect('/')
-    } 
+    }
     catch (error) {
         res.status(500).send("Failed to update employee details")
     }

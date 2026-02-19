@@ -5,5 +5,12 @@
     "position": "Software Engineer",
     "department": "Engineering",
     "salary": 75000
+  },
+  {
+    "id": 2,
+    "name": "Vishal",
+    "position": "HR manager",
+    "department": "HR",
+    "salary": "5000"
   }
 ]
