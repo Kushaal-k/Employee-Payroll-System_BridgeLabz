@@ -53,6 +53,13 @@ body {
 	margin: 0 auto 28px;
 }
 
+.top-bar h2 {
+	font-size: 20px;
+	font-weight: 700;
+	color: #1e293b;
+	margin: 0;
+}
+
 .btn-add {
 	display: inline-flex;
 	align-items: center;
@@ -338,6 +345,12 @@ tbody tr:hover {
 	font-weight: 600;
 	border-radius: 10px;
 	font-family: 'Inter', sans-serif;
+	background: #16a34a;
+	color: #fff;
+}
+
+.form-actions .btn-edit:hover {
+	background: #15803d;
 }
 
 .btn-cancel {
